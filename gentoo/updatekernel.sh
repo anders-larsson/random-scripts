@@ -61,7 +61,7 @@ if [ $? -ne 0 ];then
 fi
 
 echo "### Updating grub2 config"
-grub2-mkconfig -o /boot/grub2/grub.cfg &>> $LOGFILE
+grub-mkconfig -o /boot/grub2/grub.cfg &>> $LOGFILE
 if [ $? -ne 0 ];then
 	echo "Updating grub2 config failed"
 	exit 1
