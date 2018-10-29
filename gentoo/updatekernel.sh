@@ -10,7 +10,7 @@ if [ $# -ne 1 ]; then
 	exit 1
 fi
 
-if [ ! -f /boot/grub2/grub.cfg ]; then
+if [ ! -f /boot/grub/grub.cfg ]; then
 	echo "/boot does not seem to be mounted"
 	exit 1
 fi
@@ -22,6 +22,7 @@ else
 fi
 
 KERNEL=${1##*/}
+KVER="${KERNEL#*-}"
 
 LOGFILE=/tmp/updatekernel-$KERNEL
 >$LOGFILE
@@ -54,16 +55,19 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "### Build complete. Rebuilding kernel modules"
-emerge @module-rebuild &>> $LOGFILE
+emerge -1 @module-rebuild &>> $LOGFILE
 if [ $? -ne 0 ];then
 	echo "Rebuilding kernel modules failed"
 	exit 1
 fi
 
-echo "### Updating grub2 config"
-grub2-mkconfig -o /boot/grub2/grub.cfg &>> $LOGFILE
+# Generat  initrd
+dracut --hostonly --force --kver ${KVER}
+
+echo "### Updating grub config"
+grub-mkconfig -o /boot/grub/grub.cfg &>> $LOGFILE
 if [ $? -ne 0 ];then
-	echo "Updating grub2 config failed"
+	echo "Updating grub config failed"
 	exit 1
 fi
 
