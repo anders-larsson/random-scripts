@@ -44,7 +44,7 @@ for kernel in $(find -name '*vmlinuz*'); do
 		kernel_cmdline="${KERNEL_CMDLINE}"
 	fi
 
-  cat << EOF > "${BOOT_DIR}/loader/entries/${IDENTIFIER}-$kver.conf"
+  cat << EOF > "${BOOT_DIR}/loader/entries/${IDENTIFIER}-${kver}.conf"
 title ${IDENTIFIER} ${kver}
 linux ${kernel:1}
 options ${kernel_cmdline}
