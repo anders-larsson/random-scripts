@@ -1,0 +1,11 @@
+BACKUPPC_PATH=/usr/local/BackupPC/bin
+DATA_LOCATION=/data/backuppc/pc/*
+ARCHIVE_LOCATION=/data/archive
+
+BACKUPPC_TARCREATE_BIN=/usr/local/BackupPC/bin/BackupPC_tarCreate
+GZIP_BIN=/usr/bin/gzip
+MD5SUM_BIN=/usr/bin/md5sum
+GPG_BIN=/usr/bin/gpg
+CAT_BIN=/bin/cat
+AWK_BIN=/usr/bin/awk
+RSYNC_BIN=/usr/bin/rsync
