@@ -63,6 +63,6 @@ if [ $? -ne 0 ];then
 fi
 
 echo "### Generating initramfs using dracut"
-dracut "${DRACUTOPTIONS}"
+dracut ${DRACUTOPTIONS}
 
 echo "### All done!"
