@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -ue
+set -u
 
 if [ $(whoami) != root ]; then
 	echo "This script needs to be run as root."
