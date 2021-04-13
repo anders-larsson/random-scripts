@@ -21,8 +21,8 @@ function update_kernel
 {
   if [ -n "${1}" ]; then
     kernel="${1}"
-    sudo -- sh -c "/usr/local/sbin/update_kernel.sh ${kernel} \
-      && find /boot -maxdepth 1 -type f ! -path '/boot/config*' ! -path '/boot/.keep' ! -path '/boot/*$(uname -r)*' -mtime +15 -delete \
+    sudo -- sh -c "eclean-kernel -n 3 -x config \
+      && MAKEOPTIONS='-j7' /usr/local/sbin/update_kernel.sh ${kernel} \
       && IDENTIFIER=Gentoo KERNEL_CMDLINE='init=/lib/systemd/systemd dolvm rootfstype=ext4 rootflags=rw,noatime,data=ordered root=/dev/mapper/vg00-root rd.driver.pre=vfio-pci,pci-stub pci-stub.ids=10de:1189,10de:10de:0e0a iommu=1 amd_iommu=on quiet' /usr/local/sbin/update_efi_boot.sh"
   else
     echo 'update_kernel <kernel>'
