@@ -53,7 +53,7 @@ done
 
 popd 1>/dev/null 2>&1
 
-LATEST_KERNEL=$(echo $KERNELS | tr ' ' $'\n' | grep -v .old | sort | tail -1)
+LATEST_KERNEL=$(readlink  /usr/src/linux | cut -d- -f2-)
 bootctl set-default "${IDENTIFIER}-${LATEST_KERNEL}.conf"
 
 PAGER=cat bootctl list
